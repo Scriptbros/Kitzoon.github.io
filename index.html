@@ -77,3 +77,34 @@
     </style>
   </body>
 </html>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Webhook Sender</title>
+</head>
+<body>
+    <h1>Webhook Sender</h1>
+    <textarea id="message" rows="4" cols="50" placeholder="Enter your message"></textarea>
+    <button onclick="sendMessage()">Send Message</button>
+
+    <script>
+        function sendMessage() {
+            var webhookURL = "YOUR_WEBHOOK_URL_HERE"; // Replace with your Discord webhook URL
+            var message = document.getElementById('message').value;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", webhookURL, true);
+            xhr.setRequestHeader('Content-type', 'application/json');
+
+            var params = {
+                username: "Webhook Sender",
+                content: message
+            };
+
+            xhr.send(JSON.stringify(params));
+        }
+    </script>
+</body>
+      </html>
+
